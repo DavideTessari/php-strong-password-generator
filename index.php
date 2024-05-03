@@ -29,15 +29,7 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
             <button type="submit">Genera Password</button>
         </form>
         <?php
-        function generatePassword($length) {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+';
-            $password = '';
-            $charLength = strlen($characters);
-            for ($i = 0; $i < $length; $i++) {
-                $password .= $characters[rand(0, $charLength - 1)];
-            }
-            return $password;
-        }
+        include 'functions.php';
 
         if (isset($_GET['length'])) {
             $passwordLength = intval($_GET['length']);
@@ -52,3 +44,4 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
     </div>
 </body>
 </html>
+
