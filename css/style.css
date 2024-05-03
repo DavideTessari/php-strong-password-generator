@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f8c9;
+}
+.container {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 50px;
+}
+.password {
+    font-size: 20px;
+    margin-top: 20px;
+}
