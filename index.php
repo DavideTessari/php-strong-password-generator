@@ -12,13 +12,31 @@ Milestone 4 (BONUS)
 Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
 Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. -->
 
+<?php
+session_start();
+include 'functions.php';
+
+if (isset($_GET['length'])) {
+    $passwordLength = intval($_GET['length']);
+    if ($passwordLength >= 8 && $passwordLength <= 32) {
+        $generatedPassword = generatePassword($passwordLength);
+        $_SESSION['generated_password'] = $generatedPassword;
+        header("Location: show_password.php"); 
+        exit();
+    } else {
+        $_SESSION['error_message'] = "La lunghezza della password deve essere compresa tra 8 e 32 caratteri.";
+        header("Location: index.php");
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
     <title>Generatore di Password Sicure</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div class="container">
@@ -28,20 +46,8 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
             <input type="number" id="length" name="length" min="8" max="32" required>
             <button type="submit">Genera Password</button>
         </form>
-        <?php
-        include 'functions.php';
-
-        if (isset($_GET['length'])) {
-            $passwordLength = intval($_GET['length']);
-            if ($passwordLength >= 8 && $passwordLength <= 32) {
-                $generatedPassword = generatePassword($passwordLength);
-                echo '<div class="password">La tua password generata è: ' . $generatedPassword . '</div>';
-            } else {
-                echo '<div class="password" style="color: red;">La lunghezza della password deve essere compresa tra 8 e 32 caratteri.</div>';
-            }
-        }
-        ?>
     </div>
 </body>
 </html>
+
 
